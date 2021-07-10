@@ -13,10 +13,12 @@ thumbPrint = '079d41cbcbe3b9806899638dbd97badd1234567890'
 
 def hex_string_readable(bytes):
     return ["{:02X}".format(x) for x in bytes]
+count = 0
 
-with wincertstore.CertSystemStore("PERSONAL") as store:
+with wincertstore.CertSystemStore("MY") as store:
     #for cert in store.itercerts(usage=wincertstore.SERVER_AUTH):
     for cert in store.itercerts(usage=None):
+        count = count + 1
         if cert.get_name() == certName:
             pem = cert.get_pem()
             encodedDer = ''.join(pem.split("\n")[1:-2])
@@ -43,3 +45,4 @@ with wincertstore.CertSystemStore("PERSONAL") as store:
 
                 cert_usages = cert_details.extensions.get_extension_for_oid(ExtensionOID.EXTENDED_KEY_USAGE).value._usages
                 print("     Usage(s): ", cert_usages)
+print(count)
