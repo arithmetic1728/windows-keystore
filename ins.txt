@@ -1,1 +1,0 @@
-certutil -exportPFX -p "12345" -privatekey my 670dfea2714c5712e49b96b390d2d4e81b276ab1 .\haha.pfx
